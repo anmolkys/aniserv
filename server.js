@@ -3,18 +3,21 @@ const app = express();
 const http = require("http").createServer(app);
 const cors = require("cors");
 const jsonData = require("./csvjson.json");
-
+const numberData = require("./number.json")
 app.use(cors())
 app.use(express.json())
 
 app.get("/",(req,res)=>{
     let index = Math.floor(Math.random()*(jsonData.length+1));
     res.send({id:index,name: jsonData[index].Character,url:`https://waifuserv.onrender.com/waifu/${index}`})
+    numberData.req=numberData.req+1;
+    console.log(numberData.req)
 })
 
 app.get("/:id",(req,res)=>{
     let index = req.params.id;
     res.send({id:index,name: jsonData[index].Character,url:`https://waifuserv.onrender.com/waifu/${index}`})
+    numberData.req=numberData.req+1;
 })
 
 
@@ -36,6 +39,7 @@ app.get("/end/:id",(req,res)=>{
         res.status(404);
         res.send({id:id,name: `File limit exceeded`, url:`File limit exceeded`})
     }
+    numberData.req=numberData.req+1;
 })
 app.get("/waifu/:index",(req,res)=>{
     let index = req.params.index;
@@ -46,6 +50,7 @@ app.get("/waifu/:index",(req,res)=>{
         res.status(404);
         res.send({id:index,name: `File on ${index} does not exist`, url:`File on ${index} does not exist`})
     }
+    numberData.req=numberData.req+1;
     
 })
 
