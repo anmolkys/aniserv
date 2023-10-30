@@ -7,7 +7,7 @@ const jsonData = require("./csvjson.json");
 app.use(cors())
 app.use(express.json())
 
-app.get("/random",(req,res)=>{
+app.get("/",(req,res)=>{
     let index = Math.floor(Math.random()*(jsonData.length+1));
     res.send({id:index,name: jsonData[index].Character,url:`https://waifuserv.onrender.com/waifu/${index}`})
 })
