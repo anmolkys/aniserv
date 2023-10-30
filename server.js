@@ -1,8 +1,11 @@
 const express = require("express")
 const app = express();
 const http = require("http").createServer(app);
-
+const cors = require("cors");
 const jsonData = require("./csvjson.json");
+
+app.use(cors())
+app.use(express.json())
 
 app.get("/random",(req,res)=>{
     let index = Math.floor(Math.random()*(jsonData.length+1));
