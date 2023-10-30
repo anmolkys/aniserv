@@ -3,24 +3,26 @@ const app = express();
 const http = require("http").createServer(app);
 const cors = require("cors");
 const jsonData = require("./csvjson.json");
-const numberData = require("./number.json")
+const numberData = require("./number.json");
 app.use(cors())
 app.use(express.json())
 
-app.get("/",(req,res)=>{
+//return random
+app.get("/",(req,res)=>{ 
     let index = Math.floor(Math.random()*(jsonData.length+1));
     res.send({id:index,name: jsonData[index].Character,url:`https://waifuserv.onrender.com/waifu/${index}`})
     numberData.req=numberData.req+1;
     console.log(numberData.req)
 })
 
-app.get("/:id",(req,res)=>{
+//return one by id
+app.get("/char/:id",(req,res)=>{
     let index = req.params.id;
     res.send({id:index,name: jsonData[index].Character,url:`https://waifuserv.onrender.com/waifu/${index}`})
     numberData.req=numberData.req+1;
 })
 
-
+//return id number of pics randomly 
 app.get("/end/:id",(req,res)=>{
     let id = req.params.id
     if(id<=jsonData.length){
@@ -41,6 +43,8 @@ app.get("/end/:id",(req,res)=>{
     }
     numberData.req=numberData.req+1;
 })
+
+//return pic
 app.get("/waifu/:index",(req,res)=>{
     let index = req.params.index;
     if(jsonData[index]){
@@ -52,6 +56,10 @@ app.get("/waifu/:index",(req,res)=>{
     }
     numberData.req=numberData.req+1;
     
+})
+//return no. of req
+app.get("/stats",(req,res)=>{
+    res.send({num:numberData.req})
 })
 
 const port = process.env.PORT || 5500;
