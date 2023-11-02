@@ -10,7 +10,7 @@ app.use(express.json())
 //return random
 app.get("/",(req,res)=>{ 
     let index = Math.floor(Math.random()*(jsonData.length+1));
-    res.send({id:index,name: jsonData[index].Character,url:`https://waifuserv.onrender.com/waifu/${index}`})
+    res.send({id:index,name: jsonData[index].Character,url:`https://aniserv-main.up.railway.app/waifu/${index}`})
     numberData.req=numberData.req+1;
     console.log(numberData.req)
 })
@@ -18,7 +18,7 @@ app.get("/",(req,res)=>{
 //return one by id
 app.get("/char/:id",(req,res)=>{
     let index = req.params.id;
-    res.send({id:index,name: jsonData[index].Character,url:`https://waifuserv.onrender.com/waifu/${index}`})
+    res.send({id:index,name: jsonData[index].Character,url:`https://aniserv-main.up.railway.app/waifu/${index}`})
     numberData.req=numberData.req+1;
 })
 
@@ -33,7 +33,7 @@ app.get("/end/:id",(req,res)=>{
     let list = [];
     for(let i = 0; i<id ; i++){
         let index = randomImage();
-        list = [...list,{id:index,name: jsonData[index].Character || "unnamed" , url:`https://waifuserv.onrender.com/waifu/${index}`}]
+        list = [...list,{id:index,name: jsonData[index].Character || "unnamed" , url:`https://aniserv-main.up.railway.app/waifu/${index}`}]
     }
     res.send(list);
     }
