@@ -16,7 +16,7 @@ item = {
     id , Character , url
 }
 
-base_URL = https://waifuserv.onrender.com/
+base_URL = https://waifuserv.onrender.com/ (slowed down because free servers)
 
 #### Get Random Image
 
