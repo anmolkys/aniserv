@@ -72,7 +72,7 @@ app.get("/search/:name",(req,res)=>{
     jsonData.forEach(function (element, index) {
     let toSearch = ((element['Character'].replace(" ","")).replace("-","")).replace("_","").toLowerCase();
     if(toSearch.includes(search.toLowerCase())){
-        found = [...found,element]  
+        found = [...found,{id:index,name: element.Character || "unnamed" , url:`https://aniserv-main.up.railway.app/waifu/${index}`}];
     }
     })
     res.send(found);
