@@ -4,6 +4,9 @@ const http = require("http").createServer(app);
 const cors = require("cors");
 const jsonData = require("./csvjson.json");
 const numberData = require("./number.json");
+const fs = require("fs");
+
+
 app.use(cors())
 app.use(express.json())
 
@@ -61,6 +64,20 @@ app.get("/waifu/:index",(req,res)=>{
 app.get("/stats",(req,res)=>{
     res.send({num:numberData.req})
 })
+
+//return waifu from search
+app.get("/search/:name",(req,res)=>{
+    let search = req.params.name.toString();
+    let found = [];
+    jsonData.forEach(function (element, index) {
+    let toSearch = ((element['Character'].replace(" ","")).replace("-","")).replace("_","").toLowerCase();
+    if(toSearch.includes(search.toLowerCase())){
+        found = [...found,element]  
+    }
+    })
+    res.send(found);
+})
+
 
 const port = process.env.PORT || 5500;
 http.listen(port,()=>{console.log(`[server]: running on ${port}`)})
