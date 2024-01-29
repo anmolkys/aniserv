@@ -13,7 +13,7 @@ app.use(express.json())
 //return random
 app.get("/",(req,res)=>{ 
     let index = Math.floor(Math.random()*(jsonData.length+1));
-    res.send({id:index,name: jsonData[index].Character,url:`https://aniserv-main.up.railway.app/waifu/${index}`})
+    res.send({id:index,name: jsonData[index].Character,url:`https://waifu.up.railway.app/waifu/${index}`})
     numberData.req=numberData.req+1;
     console.log(numberData.req)
 })
@@ -21,7 +21,7 @@ app.get("/",(req,res)=>{
 //return one by id
 app.get("/char/:id",(req,res)=>{
     let index = req.params.id;
-    res.send({id:index,name: jsonData[index].Character,url:`https://aniserv-main.up.railway.app/waifu/${index}`})
+    res.send({id:index,name: jsonData[index].Character,url:`https://waifu.up.railway.app/waifu/${index}`})
     numberData.req=numberData.req+1;
 })
 
@@ -36,7 +36,7 @@ app.get("/end/:id",(req,res)=>{
     let list = [];
     for(let i = 0; i<id ; i++){
         let index = randomImage();
-        list = [...list,{id:index,name: jsonData[index].Character || "unnamed" , url:`https://aniserv-main.up.railway.app/waifu/${index}`}]
+        list = [...list,{id:index,name: jsonData[index].Character || "unnamed" , url:`https://waifu.up.railway.app/waifu/${index}`}]
     }
     res.send(list);
     }
@@ -72,7 +72,7 @@ app.get("/search/:name",(req,res)=>{
     jsonData.forEach(function (element, index) {
     let toSearch = ((element['Character'].replace(" ","")).replace("-","")).replace("_","").toLowerCase();
     if(toSearch.includes(search.toLowerCase())){
-        found = [...found,{id:index,name: element.Character || "unnamed" , url:`https://aniserv-main.up.railway.app/waifu/${index}`}];
+        found = [...found,{id:index,name: element.Character || "unnamed" , url:`https://waifu.up.railway.app/waifu/${index}`}];
     }
     })
     res.send(found);
